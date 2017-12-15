@@ -5,13 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.charon.utils4j</groupId>
-    <artifactId>utils4j-kafka-parent</artifactId>
+    <artifactId>utils4j-hadoop-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1.0</version>
     <modules>
-        <module>utils-kafka-base</module>
-        <module>utils-kafka8</module>
-        <module>utils-kafka9</module>
+        <module>utils4j-hdfs</module>
     </modules>
 
     <properties>
@@ -26,9 +24,18 @@
         <slf4j.version>1.7.21</slf4j.version>
         <log4j.version>2.8.2</log4j.version>
         <jackson.version>2.8.8</jackson.version>
-        <guava.version>22.0</guava.version>
+        <guava.version>11.0.2</guava.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
+
+        <hadoop.version>2.6.0-cdh5.11.1</hadoop.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -71,29 +78,32 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
 
-
             <dependency>
-                <groupId>io.dropwizard</groupId>
-                <artifactId>dropwizard-core</artifactId>
-                <version>${dropwizard.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-client</artifactId>
+                <version>${hadoop.version}</version>
             </dependency>
+
+
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-minicluster</artifactId>
+                <version>${hadoop.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -118,16 +128,5 @@
             </plugin>
         </plugins>
     </build>
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>libs-release</name>
-            <url>http://admin:password@10.103.17.229:8081/artifactory/libs-release-local</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>libs-snapshot</name>
-            <url>http://admin:password@10.103.17.229:8081/artifactory/libs-snapshot-local</url>
-        </snapshotRepository>
-    </distributionManagement>
+
 </project>
