@@ -40,8 +40,6 @@ abstract public class ConsumerWithProcessor {
         Properties props = new Properties();
         props.put("group.id", group);
         props.put("zookeeper.connect", zk);
-        props.put("exclude.internal.topics", "false");
-        props.put("auto.commit.interval.ms", "1000");
         return props;
     }
 
